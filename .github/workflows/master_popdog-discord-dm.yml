@@ -21,6 +21,13 @@ jobs:
         with:
           node-version: '20.x'
 
+      - name: create-json
+        id: create-json
+        uses: jsdaniell/create-json@1.1.2
+        with:
+          name: "config.json"
+          json: ${{ secrets.CONFIG_JSON }}
+
       - name: npm install, build, and test
         run: |
           npm install
