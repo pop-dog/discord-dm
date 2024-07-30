@@ -1,8 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
-const { Client } = require("@notionhq/client")
-const CONFIG = require('../../config.json');
 const { getFriendlyCampaignDateWithHour } = require('../../helpers/date-helper');
-const notion = new Client({ auth: CONFIG.notion.secretKey });
+const CampaignInfo = require('../../models/campaign-info.model');
 
 
 module.exports = {
@@ -14,7 +12,6 @@ module.exports = {
 				.setDescription('A time interval. e.g., 1d 3h or 3w. Valid units are h, d, w, m, y.')
 				.setRequired(true)),
 	async execute(interaction) {
-        const campaignInfoId = CONFIG.notion.campaignInfoId;
         const interval = interaction.options.getString('interval', true);
 
         try {
@@ -24,14 +21,8 @@ module.exports = {
             }
             let sanitizedInterval = interval.replace(/\s/g, '');
 
-            const campaignInfoDB = await notion.databases.query({
-                database_id: campaignInfoId,
-            });
-
-            if (!campaignInfoDB || campaignInfoDB.results.length === 0) throw new Error('No campaign info found.');
-
-            const campaignProps = campaignInfoDB.results[0].properties;
-            const currentDate = new Date(campaignProps['Current Date'].date.start);
+            const campaignInfo = new CampaignInfo();
+            const currentDate = await campaignInfo.get('Current Date');
 
             // Check if the interval starts with a '-' sign
             // If so, subtract time instead of adding it
@@ -77,17 +68,7 @@ module.exports = {
             });
 
             // Update the date in Notion
-            const pageId = campaignInfoDB.results[0].id;
-            await notion.pages.update({
-                page_id: pageId,
-                properties: {
-                    "Current Date": {
-                        date: {
-                            start: currentDate,
-                        },
-                    },
-                },
-            });
+            await campaignInfo.set('Current Date', currentDate);
 
             // Based on the largest interval, create a friendly message indicating how much time has passed
             if (largestInterval) {
