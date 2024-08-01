@@ -1,5 +1,4 @@
 const { SlashCommandBuilder } = require('discord.js');
-const { getFriendlyCampaignDateWithHour, getFriendlyDateDifference } = require('../../helpers/date-helper');
 const CampaignInfo = require('../../models/campaign-info.model');
 
 
@@ -13,12 +12,8 @@ module.exports = {
       const campaignInfo = new CampaignInfo();
       const currentDate = await campaignInfo.get('Current Date');
       const startDate = await campaignInfo.get('Start Date');
-
-      const friendlyCampaignDate = getFriendlyCampaignDateWithHour(currentDate);
-      const friendlyDateDifference = getFriendlyDateDifference(startDate, currentDate);
-
-      await interaction.reply(`${friendlyCampaignDate} 
-*${friendlyDateDifference}*`);
+      const reply = `It is ${currentDate.getTimeOfDayString()} on the ${currentDate.getOrdinalDayString()} of ${currentDate.getMonthString()}, ${currentDate.getFullYearString()}.` + "\n" + `*${currentDate.getDateDifferenceString(startDate)}*`;
+      await interaction.reply(reply);
     } catch (error) {
       console.log(error);
       await interaction.reply(`An error occurred: ${error.message}`);

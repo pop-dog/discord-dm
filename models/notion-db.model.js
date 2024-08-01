@@ -1,5 +1,6 @@
 const CONFIG = require('../config.json');
 const { Client } = require("@notionhq/client");
+const FantasyDate = require('./fantasy-date.model');
 
 module.exports = class NotionDB {
     constructor() {
@@ -26,7 +27,7 @@ module.exports = class NotionDB {
             if (campaignProps[key].type === 'date') {
                 this.data[key] = {
                     type: 'date',
-                    value: new Date(campaignProps[key].date.start)
+                    value: new FantasyDate(campaignProps[key].date.start)
                 }
             }
         }

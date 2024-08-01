@@ -1,5 +1,4 @@
 const { SlashCommandBuilder } = require('discord.js');
-const { getFriendlyCampaignDateWithHour } = require('../../helpers/date-helper');
 const CampaignInfo = require('../../models/campaign-info.model');
 
 
@@ -71,13 +70,11 @@ module.exports = {
             await campaignInfo.set('Current Date', currentDate);
 
             // Based on the largest interval, create a friendly message indicating how much time has passed
+            let reply = `It is ${currentDate.getTimeOfDayString()} on the ${currentDate.getOrdinalDayString()} of ${currentDate.getMonthString()}, ${currentDate.getFullYearString()}.`;
             if (largestInterval) {
-                const friendlyInterval = `${largestInterval.amount} ${largestInterval.amount > 1 ? getFriendlyUnitName(largestInterval.unit) + 's have' : getFriendlyUnitName(largestInterval.unit) + ' has'} passed.`;
-                await interaction.reply(`${friendlyInterval}
-${getFriendlyCampaignDateWithHour(currentDate)}`);
-            } else {
-                await interaction.reply(`${getFriendlyCampaignDateWithHour(currentDate)}`);
+                reply = `${largestInterval.amount} ${largestInterval.amount > 1 ? getFriendlyUnitName(largestInterval.unit) + 's have' : getFriendlyUnitName(largestInterval.unit) + ' has'} passed.` + '\n' + reply;
             }
+            await interaction.reply(reply);
         } catch (error) {
         console.log(error);
         await interaction.reply(`An error occurred: ${error.message}`);
