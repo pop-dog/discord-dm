@@ -39,3 +39,16 @@ for (const file of eventFiles) {
 client.cooldowns = new Collection();
 
 client.login(CONFIG.discord.token);
+
+// Express health check
+const express = require('express')
+const app = express();
+const port = (process.env.PORT || 5000);
+
+app.get('/', (req, res) => {
+  res.send('Ye Olde Popbot is alive and well!')
+})
+
+app.listen(port, () => {
+  console.log(`Ye Olde Popbot is listening on port ${port}`)
+})

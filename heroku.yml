@@ -1,5 +1,5 @@
 build:
   docker:
-    worker: Dockerfile
+    web: Dockerfile
 run:
-  worker: node /usr/src/app/index.js
+  web: node /usr/src/app/index.js
