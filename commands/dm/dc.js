@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+import { SlashCommandBuilder } from '@discordjs/builders';
 
 const BASE_DC = {
     'Very easy': 5,
@@ -9,7 +9,7 @@ const BASE_DC = {
     'Nearly impossible': 30
 };
 
-module.exports = {
+export const DCCommand = {
 	data: new SlashCommandBuilder()
 		.setName('dc')
 		.setDescription('Generates a difficulty class of the specified difficulty.')

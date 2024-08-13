@@ -1,6 +1,6 @@
-const { SlashCommandBuilder } = require('discord.js');
+import { SlashCommandBuilder } from '@discordjs/builders';
 
-module.exports = {
+export const RollCommand = {
 	data: new SlashCommandBuilder()
 		.setName('roll')
 		.setDescription('Roll some dice!')

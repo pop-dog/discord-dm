@@ -18,12 +18,15 @@ jobs:
         with:
           node-version: '20.x'
 
-      - name: Create the config.json file
-        id: create-json
-        uses: jsdaniell/create-json@1.1.2
-        with:
-          name: "config.json"
-          json: ${{ secrets.CONFIG_JSON }}
+      - name: 'Create env file'
+        run: |
+          touch .env
+          echo DISCORD_TOKEN=${{ secrets.DISCORD_TOKEN }} >> .env
+          echo DISCORD_CLIENT_ID=${{ secrets.DISCORD_CLIENT_ID }} >> .env
+          echo DISCORD_GUILD_ID=${{ secrets.DISCORD_GUILD_ID }} >> .env
+          echo NOTION_SECRET_KEY=${{ secrets.NOTION_SECRET_KEY }} >> .env
+          echo NOTION_DATABASE_ID=${{ secrets.NOTION_DATABASE_ID }} >> .env
+          cat .env
 
       - name: Install dependencies and BUILD
         run: |

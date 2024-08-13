@@ -1,8 +1,7 @@
-const { SlashCommandBuilder } = require('discord.js');
-const CampaignInfo = require('../../models/campaign-info.model');
+import { SlashCommandBuilder } from '@discordjs/builders';
+import { CampaignInfo } from '../../models/campaign-info.model.js';
 
-
-module.exports = {
+export const PassTimeCommand = {
 	data: new SlashCommandBuilder()
 		.setName('pass-time')
 		.setDescription('Gets the current in-game date.')

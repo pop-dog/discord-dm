@@ -1,4 +1,4 @@
-module.exports = class FantasyDate extends Date {
+export class FantasyDate extends Date {
     constructor(options) {
         super(options);
     }

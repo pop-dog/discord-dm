@@ -1,6 +1,6 @@
-const { SlashCommandBuilder } = require("discord.js");
+import { SlashCommandBuilder } from '@discordjs/builders';
 
-module.exports = {
+export const PingCommand = {
     cooldown: 5,
     data: new SlashCommandBuilder()
         .setName('ping')

@@ -1,10 +1,10 @@
-const { SlashCommandBuilder } = require('discord.js');
-const { Client } = require("@notionhq/client")
-const CONFIG = require('../../config.json');
-const notion = new Client({ auth: CONFIG.notion.secretKey });
+import { SlashCommandBuilder } from '@discordjs/builders';
+import { Client } from "@notionhq/client"
+
+const notion = new Client({ auth: process.env.NOTION_SECRET_KEY });
 
 
-module.exports = {
+export default {
 	data: new SlashCommandBuilder()
 		.setName('create-db')
 		.setDescription('Create a notion database.')
@@ -14,7 +14,7 @@ module.exports = {
 				.setRequired(true)),
 	async execute(interaction) {
 		const name = interaction.options.getString('name', true);
-        const pageId = CONFIG.notion.pageId;
+        const pageId = process.env.NOTION_PAGE_ID;
 
 		if (!name) {
 			return interaction.reply(`You must specify a name!`);

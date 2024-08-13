@@ -1,10 +1,10 @@
 const CONFIG = require('../config.json');
-const { Client } = require("@notionhq/client");
-const FantasyDate = require('./fantasy-date.model');
+import { Client } from "@notionhq/client";
+import { FantasyDate } from './fantasy-date.model.js';
 
-module.exports = class NotionDB {
+export class NotionDB {
     constructor() {
-        this.client = new Client({ auth: CONFIG.notion.secretKey });
+        this.client = new Client({ auth: process.env.NOTION_SECRET_KEY });
         this.campaignInfoId = CONFIG.notion.campaignInfoId;
         this.pageId = null;
         this.data = null;
