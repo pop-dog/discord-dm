@@ -7,6 +7,9 @@ import { ReloadCommand } from "./utility/reload.js";
 import { RollCommand } from "./utility/roll.js";
 import { ServerCommand } from "./utility/server.js";
 import { UserCommand } from "./utility/user.js";
+import { AppendCommand } from "./pf/append.js";
+import { LedgerCommand } from "./pf/ledger.js";
+import { BalanceCommand } from "./pf/balance.js";
 
 export const Commands = [
     CampaignDateCommand,
@@ -17,5 +20,8 @@ export const Commands = [
     ReloadCommand,
     RollCommand,
     ServerCommand,
-    UserCommand
+    UserCommand,
+    AppendCommand,
+    LedgerCommand,
+    BalanceCommand
 ];

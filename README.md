@@ -30,24 +30,15 @@ npm install
 ```
 3. I am using Github actions for CI/CD. You will need to configure the following secrets:
 
-- CONFIG_JSON: This is a copy of the local config.json file. **Include this in your .gitignore**
-```
-{
-    "discord": {
-        "token": "",
-        "clientId": "",
-        "guildId": ""
-    },
-    "notion": {
-        "secretKey": "",
-        "pageId": "",
-        "campaignInfoId": ""
-    }
-}
-```
+- .ENV **Include this in your .gitignore**
 - HEROKU_API_KEY
 - HEROKU_APP_NAME
 - HEROKU_EMAIL
+- NOTION_SECRET_KEY
+- NOTION_CAMPAIGN_INFO_DB_ID
+- NOTION_PARTY_FUND_DB_ID
+- FANTASY_DATE_FORMAT
+- FANTASY_YEAR_OFFSET
 
 ### Executing program
 

@@ -14,7 +14,8 @@
     "discord.js": "^14.15.3",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "notion-kv-store": "^1.0.0"
+    "notion-kv-store": "^1.0.0",
+    "notion-object-store": "^1.0.3"
   },
   "devDependencies": {
     "eslint": "^9.6.0"

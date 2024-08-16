@@ -1,12 +1,22 @@
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 export class FantasyDate extends Date {
     constructor(options) {
         super(options);
     }
     getFantasyYear() {
-        return this.getFullYear() - 1169;
+        let offset = 0;
+        if (process.env.FANTASY_YEAR_OFFSET) {
+            offset = parseInt(process.env.FANTASY_YEAR_OFFSET);
+        }
+        return this.getFullYear() + offset;
     }
     getFullYearString() {
-        return `3A ${this.getFantasyYear()}`;
+        if (process.env.FANTASY_YEAR_NAME) {
+            return process.env.FANTASY_YEAR_NAME.replace('{year}', this.getFantasyYear());
+        }
+        return this.getFantasyYear().toString();
     }
     getMonthString() {
         const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];

@@ -3,7 +3,7 @@ import { FantasyDate } from './fantasy-date.model.js';
 
 export class CampaignInfo {
     constructor() {
-        this.db = new NotionKVStore(process.env.NOTION_SECRET_KEY, process.env.NOTION_DATABASE_ID);
+        this.db = new NotionKVStore(process.env.NOTION_SECRET_KEY, process.env.NOTION_CAMPAIGN_INFO_DB_ID);
     }
 
     async get(key) {
