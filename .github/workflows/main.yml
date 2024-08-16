@@ -26,6 +26,7 @@ jobs:
           echo DISCORD_GUILD_ID=${{ secrets.DISCORD_GUILD_ID }} >> .env
           echo NOTION_SECRET_KEY=${{ secrets.NOTION_SECRET_KEY }} >> .env
           echo NOTION_CAMPAIGN_INFO_DB_ID=${{ secrets.NOTION_CAMPAIGN_INFO_DB_ID }} >> .env
+          echo NOTION_PARTY_FUND_DB_ID=${{ secrets.NOTION_PARTY_FUND_DB_ID }} >> .env
           cat .env
 
       - name: Install dependencies and BUILD
